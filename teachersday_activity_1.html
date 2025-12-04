@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Teacher's Day</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            margin: 20px;
+        }
+
+        .card {
+            width: 400px;
+            height: 600px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease;
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .card-front {
+            background: linear-gradient(145deg, #ffeaa7, #fab1a0);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-back {
+            background: linear-gradient(145deg, #a8e6cf, #88d8c0);
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #2d3436;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .apple {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #636e72;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .flip-instruction {
+            font-size: 1rem;
+            color: #74b9ff;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2d3436;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #636e72;
+            font-size: 1rem;
+        }
+
+        .decorative-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .star {
+            position: absolute;
+            color: #fdcb6e;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .star:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .star:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 1s; }
+        .star:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 1.5s; }
+
+        .hearts {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+        }
+
+        .heart {
+            display: inline-block;
+            margin: 0 5px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .heart:nth-child(2) { animation-delay: 0.3s; }
+        .heart:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+                color: #e17055;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 320px;
+                height: 500px;
+            }
+            
+            .card-face {
+                padding: 30px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .apple {
+                font-size: 3rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="card-container">
+        <div class="card" id="teacherCard">
+            <div class="card-face card-front">
+                <div class="decorative-elements">
+                    <div class="star">⭐</div>
+                    <div class="star">✨</div>
+                    <div class="star">⭐</div>
+                    <div class="star">✨</div>
+                </div>
+                
+                <h1 class="title">Happy Teacher's Day!</h1>
+                <div class="apple">🍎</div>
+                <p class="subtitle">To the most amazing Instructor "Randy Bello</p>
+                <div class="flip-instruction">Click to open your card! 💌</div>
+                
+                <div class="hearts">
+                    <span class="heart">❤️</span>
+                    <span class="heart">💛</span>
+                    <span class="heart">❤️</span>
+                </div>
+            </div>
+            
+            <div class="card-face card-back">
+                <div class="decorative-elements">
+                    <div class="star">🌟</div>
+                    <div class="star">✨</div>
+                    <div class="star">🌟</div>
+                    <div class="star">✨</div>
+                </div>
+                
+                <div class="message">
+                    <p><strong>Dear Teacher,</strong></p>
+                    <p>Thank you for being the guiding light in our educational journey. Your patience, wisdom, and dedication have shaped not just our minds, but our hearts as well.</p>
+                    <p>You've taught us that learning is a lifelong adventure, and that every question is a step toward discovery. Your encouragement has given us the confidence to reach for the stars.</p>
+                    <p>On this special day, we celebrate you and all the incredible ways you've made a difference in our lives.</p>
+                    <p><strong>You are truly appreciated! 🌟</strong></p>
+                </div>
+                
+                <div class="signature">
+                    With gratitude and respect,<br>
+                    Your Students "Angelo R. Mingoy" 📚
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const card = document.getElementById('teacherCard');
+        
+        card.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+
+        // Add keyboard accessibility
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.classList.toggle('flipped');
+            }
+        });
+
+        // Make card focusable
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', 'Click to flip the Teacher\'s Day card');
+
+        // Add some floating animation elements
+        function createFloatingElement() {
+            const elements = ['📚', '✏️', '🎓', '🌟', '💡'];
+            const element = document.createElement('div');
+            element.textContent = elements[Math.floor(Math.random() * elements.length)];
+            element.style.position = 'fixed';
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.top = '100vh';
+            element.style.fontSize = '2rem';
+            element.style.pointerEvents = 'none';
+            element.style.zIndex = '-1';
+            element.style.animation = 'float-up 8s linear forwards';
+            
+            document.body.appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 8000);
+        }
+
+        // Add floating animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float-up {
+                to {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create floating elements periodically
+        setInterval(createFloatingElement, 3000);
+        
+        // Create initial floating elements
+        setTimeout(createFloatingElement, 1000);
+        setTimeout(createFloatingElement, 2000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992d31ecd6020506',t:'MTc2MTE4MDE1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
